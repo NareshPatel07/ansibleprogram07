@@ -1,0 +1,225 @@
+Ansible steps:
+
+ vagrantfile->ansible-controller->terminal
+1.vagrant init centos/7
+2. vagrant provision
+3.vagrant ssh
+4.ls
+5. cd ansible-project
+6.ls
+7.vi playbook.yml
+8.exit
+9.cd ansible-hosts
+10.vagrant init centos/7
+11.vagrant provision
+12.vagrant status
+13.vagrant ssh
+14.vagrant ssh web
+15.exit
+16.vagrant ssh db
+17.exit
+18.vagrant status
+19. cd ..
+20.vagrant ssh
+21.cd ansible-project
+22.ansible all -m ping -i hosts
+23.ansible-playbook -i hosts playbook.yml
+
+
+
+
+Playbook.yml File
+
+- name: Configure Web Server
+  hosts: webservers
+  become: true
+  tasks:
+    - name: Install Apache
+      yum:
+        name: httpd
+        state: latest
+
+    - name: Start and enable Apache
+      service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: Create a custom index.html
+      copy:
+        dest: /var/www/html/index.html
+        content: "<h1>Hello from Ansible Web Server!</h1>"
+
+- name: Configure DB Server
+  hosts: dbservers
+  become: true
+  tasks:
+    - name: Install Apache
+      yum:
+        name: httpd
+        state: latest
+
+    - name: Start and enable Apache
+      service:
+        name: httpd
+        state: started
+        enabled: true
+
+
+
+
+
+
+FirstSelenium.java
+
+package com.example;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class FirstSelenium {
+     static WebDriver driver;
+
+     public static void main(String[] args) {
+          System.setProperty("web driver.chrome.driver","./Drivers/chromedriver.exe");
+          driver =new ChromeDriver();
+          driver.get("https://www.google.com");
+          //driver.navigate().to("https://www.google.com");
+          driver.quit();
+     }
+
+}
+
+
+
+
+GetTitleAndUrl.java
+
+package com.example;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+public class GetTitleAndUrl {
+    static WebDriver driver;
+
+ public static void main(String[] args) {
+        System.setProperty("web driver.chrome.driver", "./Drivers/chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.get("https://www.google.com");
+        driver.navigate().to("https://www.bietdvg.edu/");
+        String url = driver.getCurrentUrl();
+        String title = driver.getTitle();
+        System.out.println("The url is: "   +url );
+        System.out.println("The title is: " + title);
+        driver.quit();
+    }
+}
+
+
+
+
+BrowserInSelenium.java
+
+package com.example;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class BrowserInSelenium {
+    static WebDriver driver;
+
+    public static void main(String[] args) throws InterruptedException {
+        System.setProperty("web driver.chrome.driver", "./Drivers/chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.navigate().to("https://www.google.com/");
+        Thread.sleep(2000);// Hard wait not recommended
+        driver.navigate().to("https://www.selenium.dev/");
+        Thread.sleep(2000);
+        driver.navigate().to("https://www.saucedemo.com/");
+        Thread.sleep(2000);
+        driver.navigate().back();
+        Thread.sleep(2000);
+        driver.navigate().forward();
+        driver.findElement(By.name("user-name")).sendKeys("Usha");
+        Thread.sleep(2000);
+        driver.navigate().refresh();
+        Thread.sleep(1000);
+        driver.close();
+    }
+}
+
+
+
+
+loginTest.java
+
+package com.example;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class logintest {
+    public static void main(String[] args) throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.saucedemo.com/");
+        driver.manage().window().maximize();
+        Thread.sleep(2000);
+        driver.findElement(By.id("user-name")).sendKeys("standard_user");
+        Thread.sleep(2000);
+        driver.findElement(By.id("password")).sendKeys("secret_sauce");
+        Thread.sleep(2000);
+        driver.findElement(By.id("login-button")).click();
+        Thread.sleep(2000);
+        driver.quit();
+    }
+}
+
+
+
+
+Dependency
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+
+
+
+Plugins
+
+<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+  </configuration>
+      </plugin>
+
+
+
+
+Selenium Dependency
+
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>4.25.0</version>
+    </dependency>
+
+
+Testng Dependency
+
+<dependency>
+      <groupId>org.testng</groupId>
+
+      <artifactId>testng</artifactId>
+      <version>7.10.2</version>
+      <scope>test</scope>
+    </dependency>
+
